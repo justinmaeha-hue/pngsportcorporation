@@ -1,0 +1,789 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07152e">
+<title>PNG Spot Corporation</title>
+
+<style>
+:root {
+  --navy:#07152e;
+  --blue:#145de0;
+  --gold:#ffc94a;
+  --bg:#f1f5fb;
+  --white:#fff;
+  --green:#16844a;
+  --red:#d73535;
+}
+* {box-sizing:border-box}
+body {
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:#17233b;
+}
+button,input,select,textarea {font:inherit}
+button {cursor:pointer}
+header {
+  background:linear-gradient(135deg,#07152e,#153c77);
+  color:white;
+  padding:19px 16px;
+  position:sticky;
+  top:0;
+  z-index:5;
+  box-shadow:0 3px 12px #0002;
+}
+.brand {font-size:21px;font-weight:900;color:var(--gold)}
+.tagline {font-size:11px;margin-top:5px;color:#d9e5ff}
+.header-row {display:flex;align-items:center;justify-content:space-between;gap:8px}
+main {max-width:800px;margin:auto;padding:15px 12px 100px}
+.card {
+  background:white;border-radius:17px;padding:17px;
+  margin-bottom:15px;box-shadow:0 4px 18px #1122440b;
+  border:1px solid #e5eaf2;
+}
+h2 {font-size:19px;margin:0 0 13px}
+h3 {font-size:16px;margin:0 0 10px}
+p {line-height:1.5}
+.small {font-size:12px;color:#65718a;line-height:1.5}
+.gold {color:#b47b00}
+.row {display:flex;gap:10px;flex-wrap:wrap}
+.row>* {flex:1;min-width:110px}
+.stat {
+  background:#f1f5ff;border-radius:12px;padding:13px;
+  margin:4px 0;
+}
+.stat strong {display:block;font-size:19px;margin-top:6px}
+input,select,textarea {
+  width:100%;padding:12px;border:1px solid #d6deea;
+  border-radius:10px;background:white;margin:6px 0 12px;
+}
+label {font-size:13px;font-weight:700}
+.btn {
+  display:inline-block;border:0;border-radius:10px;padding:12px 15px;
+  background:var(--blue);color:white;font-weight:700;text-align:center;
+}
+.btn.goldbtn {background:var(--gold);color:#17233b}
+.btn.dark {background:var(--navy)}
+.btn.light {background:#eaf0fb;color:#19345f}
+.btn.red {background:var(--red)}
+.btn.green {background:var(--green)}
+.btn.full {width:100%}
+button:disabled {opacity:.5;cursor:not-allowed}
+.vip-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.vip {
+  padding:14px 11px;border-radius:15px;background:#fff;
+  border:1px solid #dce4f1;position:relative;overflow:hidden;
+}
+.vip.featured {border:2px solid var(--gold)}
+.vip h3 {color:#173e80}
+.price {font-size:24px;font-weight:900;color:#102c5a;margin:8px 0}
+.vip .detail {font-size:12px;color:#56647b;margin:7px 0}
+.vip .total {background:#fff6dc;border-radius:9px;padding:10px;margin:10px 0}
+.total strong {display:block;font-size:19px;color:#875900;margin-top:4px}
+.pill {
+  display:inline-block;border-radius:30px;padding:5px 9px;
+  font-size:11px;font-weight:bold;background:#eaf0fb;color:#264776;
+}
+.notice {background:#fff5d9;padding:12px;border-radius:10px;font-size:12px;line-height:1.5}
+.success {background:#e5f7ec;padding:12px;border-radius:10px;color:#17633a}
+.warning {background:#fff0ef;padding:12px;border-radius:10px;color:#8e2525}
+.hidden {display:none!important}
+nav {
+  position:fixed;bottom:0;left:0;right:0;background:white;
+  display:flex;justify-content:space-around;padding:9px 2px;
+  border-top:1px solid #dce3ee;z-index:10;
+  padding-bottom:max(9px,env(safe-area-inset-bottom));
+}
+nav button {
+  background:none;border:0;color:#65718a;font-size:11px;
+  padding:6px 3px;flex:1;
+}
+nav button span {display:block;font-size:20px;margin-bottom:4px}
+nav button.active {color:var(--blue);font-weight:bold}
+.item {border-bottom:1px solid #e6ebf3;padding:12px 0}
+.item:last-child {border-bottom:0}
+.status {font-size:12px;font-weight:bold}
+.status.Pending {color:#a16a00}
+.status.Approved {color:var(--green)}
+.status.Rejected {color:var(--red)}
+img.preview {max-width:100%;max-height:230px;object-fit:contain;border-radius:10px}
+footer {text-align:center;font-size:11px;color:#7b879b;padding:15px}
+@media(max-width:360px) {
+ .vip-grid {grid-template-columns:1fr}
+ .brand {font-size:18px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-row">
+    <div>
+      <div class="brand">★ PNG SPOT CORPORATION</div>
+      <div class="tagline">YOUR PLATFORM • YOUR COMMUNITY</div>
+    </div>
+    <button class="btn goldbtn" id="accountBtn" onclick="showPage('account')">
+      Sign in
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- HOME -->
+<section id="home" class="page">
+  <div class="card" style="background:linear-gradient(135deg,#102a55,#145de0);color:white">
+    <div class="small" style="color:#dce8ff">WELCOME TO</div>
+    <h2 style="font-size:25px;margin-top:8px">PNG Spot Corporation</h2>
+    <p>Explore membership plans, manage requests, and view your account activity.</p>
+    <button class="btn goldbtn" onclick="showPage('vip')">Explore VIP plans →</button>
+  </div>
+
+  <div class="row">
+    <div class="stat">
+      <span class="small">Account balance</span>
+      <strong id="homeBalance">K0.00</strong>
+    </div>
+    <div class="stat">
+      <span class="small">My membership</span>
+      <strong id="homeVIP">None</strong>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Membership plans</h2>
+    <p class="small">Review each plan's listed fee, daily payout amount, duration and projected total. Figures are illustrative and are not guaranteed earnings.</p>
+    <button class="btn full" onclick="showPage('vip')">View all plans</button>
+  </div>
+
+  <div class="card">
+    <h2>Quick actions</h2>
+    <div class="row">
+      <button class="btn light" onclick="showPage('topup')">＋ Top up</button>
+      <button class="btn light" onclick="showPage('withdraw')">↗ Withdraw</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn light" onclick="showPage('history')">▤ My activity</button>
+      <button class="btn light" onclick="showPage('support')">☏ Support</button>
+    </div>
+  </div>
+
+  <div class="notice">
+    <strong>Prototype notice:</strong> This version stores test data only in this browser. It does not process real payments, verify BSP transfers, send real administrator notifications, or transfer money.
+  </div>
+</section>
+
+<!-- VIP PLANS -->
+<section id="vip" class="page hidden">
+  <div class="card">
+    <h2>★ VIP membership plans</h2>
+    <p class="small">Compare the six plans below. The projected difference is total scheduled payouts minus the membership fee, before other costs. It is not a promise of profit.</p>
+  </div>
+  <div class="vip-grid" id="vipGrid"></div>
+</section>
+
+<!-- REGISTER AND LOGIN -->
+<section id="account" class="page hidden">
+  <div class="card">
+    <h2>Create your account</h2>
+    <p class="small">Use test details only. This standalone prototype is not suitable for real user accounts.</p>
+    <form id="registerForm">
+      <label>Full name</label>
+      <input id="regName" required maxlength="70" placeholder="Enter your full name">
+
+      <label>Email address</label>
+      <input id="regEmail" type="email" required maxlength="100" placeholder="you@example.com">
+
+      <label>Phone number</label>
+      <input id="regPhone" required maxlength="25" placeholder="Your phone number">
+
+      <label>Create a password (prototype only)</label>
+      <input id="regPassword" type="password" required minlength="8" maxlength="100" autocomplete="new-password" placeholder="At least 8 characters">
+
+      <button class="btn full" type="submit">Create account</button>
+    </form>
+    <p id="regMessage" class="small"></p>
+  </div>
+
+  <div class="card">
+    <h2>Sign in</h2>
+    <form id="loginForm">
+      <label>Email address</label>
+      <input id="loginEmail" type="email" required placeholder="Your registered email">
+
+      <label>Password</label>
+      <input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Your password">
+
+      <button class="btn dark full" type="submit">Sign in</button>
+    </form>
+    <p id="loginMessage" class="small"></p>
+    <button class="btn light full" onclick="logout()">Sign out</button>
+  </div>
+
+  <div class="card">
+    <h2>My profile</h2>
+    <div id="profileInfo" class="small">Sign in to view your local prototype profile.</div>
+  </div>
+</section>
+
+<!-- TOP UP -->
+<section id="topup" class="page hidden">
+  <div class="card">
+    <h2>Submit payment evidence</h2>
+    <div class="notice">
+      <strong>Prototype only:</strong> A submitted receipt is not proof that money reached a bank account. Verify payments independently before approving any real membership.
+    </div>
+    <h3 style="margin-top:17px">Displayed payment details</h3>
+    <div class="stat">
+      <span class="small">Account name supplied for this prototype</span>
+      <strong style="font-size:17px">PNG Spot Corporation</strong>
+      <span class="small">BSP account/reference: 0001466960</span>
+      <button class="btn light" onclick="copyText('0001466960')">Copy reference</button>
+    </div>
+
+    <form id="topupForm">
+      <label>Amount (Kina)</label>
+      <input id="topupAmount" type="number" min="1" max="100000" step="0.01" required placeholder="Enter amount">
+
+      <label>Transaction reference</label>
+      <input id="topupRef" required maxlength="100" placeholder="Enter reference from your receipt">
+
+      <label>Upload receipt image (optional)</label>
+      <input id="receipt" type="file" accept="image/*">
+      <img id="receiptPreview" class="preview hidden" alt="Receipt preview">
+
+      <p class="small">The selected image is only previewed in this browser; it is not securely uploaded to a server.</p>
+      <button class="btn full" type="submit">Submit for review</button>
+    </form>
+    <div id="topupMessage"></div>
+  </div>
+</section>
+
+<!-- WITHDRAW -->
+<section id="withdraw" class="page hidden">
+  <div class="card">
+    <h2>Withdrawal request</h2>
+    <div class="notice">Submitting a request does not send money. A real payout system requires a secure backend and an authorized manual transfer.</div>
+    <form id="withdrawForm">
+      <label>Requested amount (Kina)</label>
+      <input id="withdrawAmount" type="number" min="1" max="100000" step="0.01" required placeholder="Enter amount">
+
+      <label>Your BSP account name</label>
+      <input id="withdrawName" required maxlength="100" placeholder="Account holder name">
+
+      <label>BSP account number</label>
+      <input id="withdrawAccount" required maxlength="40" placeholder="Enter account number">
+
+      <button class="btn full" type="submit">Submit withdrawal request</button>
+    </form>
+    <div id="withdrawMessage"></div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section id="history" class="page hidden">
+  <div class="card">
+    <h2>My activity</h2>
+    <p class="small">This list shows locally saved prototype requests on this device and browser.</p>
+    <div id="myHistory"></div>
+  </div>
+  <div class="card">
+    <h2>Notifications</h2>
+    <div id="myNotifications"></div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="page hidden">
+  <div class="card">
+    <h2>Community</h2>
+    <p>Welcome to the PNG Spot Corporation community.</p>
+    <p class="small">Referral tracking and team rewards are not connected in this prototype. No referral income is calculated or paid.</p>
+    <button class="btn full" onclick="showPage('support')">Contact support</button>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section id="support" class="page hidden">
+  <div class="card">
+    <h2>Customer support</h2>
+    <p>Contact the support number supplied by the platform owner.</p>
+    <a class="btn green full" style="text-decoration:none" href="https://wa.me/67578423441" target="_blank" rel="noopener">Chat on WhatsApp</a>
+    <p class="small">Check the phone number before publishing the website to ensure it is correct and belongs to the intended support contact.</p>
+  </div>
+</section>
+
+<!-- ADMIN -->
+<section id="admin" class="page hidden">
+  <div class="card">
+    <h2>Administration</h2>
+    <div class="warning">
+      <strong>Local prototype administrator panel.</strong>
+      This panel is not protected by a server login. Anyone who can open this page may access locally saved test data. Do not use it for real customers or sensitive information.
+    </div>
+    <p class="small">The lists below only show requests saved in this same browser. They are not real-time notifications from other devices.</p>
+  </div>
+
+  <div class="card">
+    <h2>Registration activity</h2>
+    <div id="adminUsers"></div>
+  </div>
+
+  <div class="card">
+    <h2>Payment evidence requests</h2>
+    <div id="adminTopups"></div>
+  </div>
+
+  <div class="card">
+    <h2>Withdrawal requests</h2>
+    <div id="adminWithdrawals"></div>
+  </div>
+
+  <div class="card">
+    <h2>Local prototype controls</h2>
+    <button class="btn light full" onclick="refreshAll()">Refresh local records</button>
+    <p class="small">Clearing browser storage can permanently remove these test records. Export or back up anything you need before clearing data.</p>
+  </div>
+</section>
+
+<footer>
+  PNG Spot Corporation • Prototype interface<br>
+  No real banking, payment processing, or guaranteed earnings.
+</footer>
+</main>
+
+<nav>
+  <button class="active" data-page="home" onclick="showPage('home')"><span>⌂</span>Home</button>
+  <button data-page="vip" onclick="showPage('vip')"><span>★</span>VIP</button>
+  <button data-page="topup" onclick="showPage('topup')"><span>＋</span>Top up</button>
+  <button data-page="withdraw" onclick="showPage('withdraw')"><span>↗</span>Withdraw</button>
+  <button data-page="account" onclick="showPage('account')"><span>♙</span>Account</button>
+  <button data-page="admin" onclick="showPage('admin')"><span>⚙</span>Admin</button>
+</nav>
+
+<script>
+"use strict";
+
+/*
+ PNG SPOT CORPORATION
+ Front-end prototype only.
+
+ Do not use localStorage for real banking information,
+ real passwords, identity documents, or financial records.
+*/
+
+const PLANS = [
+  {id:1, fee:50, daily:3, days:50},
+  {id:2, fee:150, daily:5, days:70},
+  {id:3, fee:300, daily:7, days:80},
+  {id:4, fee:600, daily:15, days:90},
+  {id:5, fee:1200, daily:70, days:45},
+  {id:6, fee:3000, daily:100, days:250}
+];
+
+const $ = id => document.getElementById(id);
+const KEY = "pngspot_prototype_v1";
+
+function loadData() {
+  try {
+    return JSON.parse(localStorage.getItem(KEY)) || {
+      users:[], topups:[], withdrawals:[], notifications:[], session:null
+    };
+  } catch {
+    return {
+      users:[], topups:[], withdrawals:[], notifications:[], session:null
+    };
+  }
+}
+
+let data = loadData();
+
+function saveData() {
+  try {
+    localStorage.setItem(KEY, JSON.stringify(data));
+  } catch {
+    alert("Browser storage is unavailable or full. No server copy was saved.");
+  }
+}
+
+function money(n) {
+  return "K" + Number(n || 0).toLocaleString("en-PG", {
+    minimumFractionDigits:2, maximumFractionDigits:2
+  });
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  }[c]));
+}
+
+function makeId() {
+  return "REQ-" + Date.now().toString(36).toUpperCase()
+    + "-" + Math.random().toString(36).slice(2,6).toUpperCase();
+}
+
+function currentUser() {
+  return data.users.find(u => u.id === data.session) || null;
+}
+
+function notify(userId, message) {
+  data.notifications.unshift({
+    id:makeId(), userId, message,
+    date:new Date().toLocaleString(), read:false
+  });
+}
+
+function renderPlans() {
+  $("vipGrid").innerHTML = PLANS.map(p => {
+    const total = p.daily * p.days;
+    const difference = total - p.fee;
+
+    return `
+      <article class="vip ${p.id===5 ? "featured":""}">
+        <span class="pill">VIP ${p.id}</span>
+        <div class="price">${money(p.fee)}</div>
+        <div class="detail">Membership fee</div>
+        <div class="detail">Daily scheduled amount: <b>${money(p.daily)}</b></div>
+        <div class="detail">Duration: <b>${p.days} days</b></div>
+        <div class="total">
+          <span class="small">Projected total payouts</span>
+          <strong>${money(total)}</strong>
+        </div>
+        <div class="detail">Difference after fee: <b>${difference>=0?"+":""}${money(difference)}</b></div>
+        <button class="btn full" onclick="choosePlan(${p.id})">Select VIP ${p.id}</button>
+      </article>`;
+  }).join("");
+}
+
+function choosePlan(id) {
+  const p = PLANS.find(x => x.id === id);
+  if (!p) return;
+  $("topupAmount").value = p.fee;
+  showPage("topup");
+}
+
+function showPage(page) {
+  document.querySelectorAll(".page").forEach(el => el.classList.add("hidden"));
+  const target = $(page);
+  if (target) target.classList.remove("hidden");
+
+  document.querySelectorAll("nav button").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.page === page);
+  });
+
+  refreshAll();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function updateHeader() {
+  const u = currentUser();
+  $("accountBtn").textContent = u ? "My account" : "Sign in";
+  $("homeVIP").textContent = u && u.vip ? "VIP " + u.vip : "None";
+  $("homeBalance").textContent = money(u ? u.balance : 0);
+}
+
+function refreshProfile() {
+  const u = currentUser();
+
+  if (!u) {
+    $("profileInfo").textContent = "Sign in to view your local prototype profile.";
+    return;
+  }
+
+  $("profileInfo").innerHTML = `
+    <div class="item"><b>Name:</b> ${escapeHTML(u.name)}</div>
+    <div class="item"><b>Email:</b> ${escapeHTML(u.email)}</div>
+    <div class="item"><b>Phone:</b> ${escapeHTML(u.phone)}</div>
+    <div class="item"><b>Account balance:</b> ${money(u.balance)}</div>
+    <div class="item"><b>Membership:</b> ${u.vip ? "VIP "+u.vip : "None"}</div>
+    <div class="small">Local prototype account only. This is not a verified financial account.</div>`;
+}
+
+function statusHTML(status) {
+  return `<span class="status ${escapeHTML(status)}">${escapeHTML(status)}</span>`;
+}
+
+function renderHistory() {
+  const u = currentUser();
+
+  if (!u) {
+    $("myHistory").innerHTML = "<p class='small'>Sign in to view activity.</p>";
+    $("myNotifications").innerHTML = "<p class='small'>No account signed in.</p>";
+    return;
+  }
+
+  const items = [
+    ...data.topups.filter(x => x.userId===u.id).map(x=>({...x,kind:"Top-up request"})),
+    ...data.withdrawals.filter(x => x.userId===u.id).map(x=>({...x,kind:"Withdrawal request"}))
+  ].sort((a,b)=>b.createdAt-a.createdAt);
+
+  $("myHistory").innerHTML = items.length ? items.map(x=>`
+    <div class="item">
+      <b>${escapeHTML(x.kind)}</b> — ${money(x.amount)}
+      <div class="small">${escapeHTML(x.id)} • ${escapeHTML(x.date)}</div>
+      <div>${statusHTML(x.status)}</div>
+    </div>`).join("") : "<p class='small'>No requests yet.</p>";
+
+  const notifications = data.notifications.filter(x=>x.userId===u.id);
+
+  $("myNotifications").innerHTML = notifications.length ? notifications.map(n=>`
+    <div class="item">
+      ${escapeHTML(n.message)}
+      <div class="small">${escapeHTML(n.date)}</div>
+    </div>`).join("") : "<p class='small'>No notifications yet.</p>";
+}
+
+function renderAdmin() {
+  $("adminUsers").innerHTML = data.users.length ? data.users.map(u=>`
+    <div class="item">
+      <b>${escapeHTML(u.name)}</b>
+      <div class="small">${escapeHTML(u.email)} • ${escapeHTML(u.phone)}</div>
+      <div class="small">Created: ${escapeHTML(u.created)}</div>
+      <div class="small">Account: ${escapeHTML(u.id)}</div>
+    </div>`).join("") : "<p class='small'>No local registrations.</p>";
+
+  $("adminTopups").innerHTML = data.topups.length ? data.topups.map(x=>`
+    <div class="item">
+      <b>${money(x.amount)}</b> — ${statusHTML(x.status)}
+      <div class="small">${escapeHTML(x.id)} • ${escapeHTML(x.date)}</div>
+      <div class="small">User: ${escapeHTML(x.userId)}</div>
+      <div class="small">Reference: ${escapeHTML(x.reference)}</div>
+      <div class="row" style="margin-top:9px">
+        <button class="btn green" onclick="reviewRequest('topups','${x.id}','Approved')">Mark reviewed / approved</button>
+        <button class="btn red" onclick="reviewRequest('topups','${x.id}','Rejected')">Reject</button>
+      </div>
+    </div>`).join("") : "<p class='small'>No top-up requests.</p>";
+
+  $("adminWithdrawals").innerHTML = data.withdrawals.length ? data.withdrawals.map(x=>`
+    <div class="item">
+      <b>${money(x.amount)}</b> — ${statusHTML(x.status)}
+      <div class="small">${escapeHTML(x.id)} • ${escapeHTML(x.date)}</div>
+      <div class="small">User: ${escapeHTML(x.userId)}</div>
+      <div class="small">Account holder: ${escapeHTML(x.accountName)}</div>
+      <div class="small">Account number: ${escapeHTML(x.account)}</div>
+      <div class="row" style="margin-top:9px">
+        <button class="btn green" onclick="reviewRequest('withdrawals','${x.id}','Approved')">Mark reviewed</button>
+        <button class="btn red" onclick="reviewRequest('withdrawals','${x.id}','Rejected')">Reject</button>
+      </div>
+      <p class="small">Marking approved records a prototype decision only. It does not transfer money.</p>
+    </div>`).join("") : "<p class='small'>No withdrawal requests.</p>";
+}
+
+function refreshAll() {
+  data = loadData();
+  updateHeader();
+  refreshProfile();
+  renderHistory();
+  renderAdmin();
+}
+
+function reviewRequest(collection, id, status) {
+  data = loadData();
+  const list = data[collection];
+  const request = list.find(x=>x.id===id);
+  if (!request) return alert("Request not found.");
+
+  if (request.status !== "Pending") {
+    return alert("This request has already been reviewed.");
+  }
+
+  request.status = status;
+  request.reviewedAt = new Date().toLocaleString();
+
+  const message = collection === "topups"
+    ? `Your top-up request ${id} was marked ${status.toLowerCase()} in the local prototype.`
+    : `Your withdrawal request ${id} was marked ${status.toLowerCase()} in the local prototype. No money was transferred.`;
+
+  notify(request.userId, message);
+  saveData();
+  refreshAll();
+  alert("Prototype status updated. This does not verify a bank transfer.");
+}
+
+$("registerForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  data = loadData();
+
+  const name = $("regName").value.trim();
+  const email = $("regEmail").value.trim().toLowerCase();
+  const phone = $("regPhone").value.trim();
+  const password = $("regPassword").value;
+
+  if (data.users.some(u=>u.email===email)) {
+    $("regMessage").textContent = "That email already exists in this browser.";
+    return;
+  }
+
+  /*
+    Never store real passwords in localStorage.
+    This prototype deliberately does not create a persistent
+    password or implement secure authentication.
+  */
+  const id = makeId();
+  const user = {
+    id,name,email,phone,
+    created:new Date().toLocaleString(),
+    balance:0,vip:null
+  };
+
+  data.users.push(user);
+  data.session = id;
+  notify(id, "Your local prototype registration was created.");
+  saveData();
+
+  $("regPassword").value = "";
+  $("regMessage").textContent =
+    "Local prototype account created. No password was saved. Secure server authentication is required for a real account.";
+
+  refreshAll();
+  showPage("account");
+});
+
+$("loginForm").addEventListener("submit", e => {
+  e.preventDefault();
+  data = loadData();
+  const email = $("loginEmail").value.trim().toLowerCase();
+  const user = data.users.find(u=>u.email===email);
+
+  if (!user) {
+    $("loginMessage").textContent =
+      "No local account found. Create an account first. Password login is not implemented in this prototype.";
+    return;
+  }
+
+  data.session = user.id;
+  saveData();
+  $("loginPassword").value = "";
+  $("loginMessage").textContent =
+    "Local session opened. Secure password verification requires a backend.";
+  refreshAll();
+});
+
+function logout() {
+  data = loadData();
+  data.session = null;
+  saveData();
+  $("loginMessage").textContent = "Signed out of the local prototype.";
+  refreshAll();
+}
+
+$("receipt").addEventListener("change", e => {
+  const file = e.target.files[0];
+  const preview = $("receiptPreview");
+  if (!file) {
+    preview.classList.add("hidden");
+    preview.removeAttribute("src");
+    return;
+  }
+
+  if (!file.type.startsWith("image/")) {
+    alert("Please choose an image file.");
+    e.target.value = "";
+    return;
+  }
+
+  if (file.size > 5*1024*1024) {
+    alert("Choose an image under 5 MB.");
+    e.target.value = "";
+    return;
+  }
+
+  preview.src = URL.createObjectURL(file);
+  preview.classList.remove("hidden");
+});
+
+$("topupForm").addEventListener("submit", e => {
+  e.preventDefault();
+  data = loadData();
+  const u = data.users.find(x=>x.id===data.session);
+
+  if (!u) {
+    $("topupMessage").innerHTML =
+      "<p class='warning'>Create a local account first. No payment will be made here.</p>";
+    return;
+  }
+
+  const amount = Number($("topupAmount").value);
+  const reference = $("topupRef").value.trim();
+
+  if (!Number.isFinite(amount) || amount<=0 || amount>100000) {
+    return alert("Enter a valid amount.");
+  }
+
+  const request = {
+    id:makeId(), userId:u.id, amount, reference,
+    status:"Pending",
+    date:new Date().toLocaleString(),
+    createdAt:Date.now()
+  };
+
+  data.topups.unshift(request);
+  notify(u.id, `Top-up request ${request.id} submitted for local review.`);
+  saveData();
+
+  $("topupMessage").innerHTML =
+    `<p class="success">Request recorded in this browser. Status: Pending review. No bank transaction occurred.</p>`;
+  $("topupForm").reset();
+  $("receiptPreview").classList.add("hidden");
+  refreshAll();
+});
+
+$("withdrawForm").addEventListener("submit", e => {
+  e.preventDefault();
+  data = loadData();
+  const u = data.users.find(x=>x.id===data.session);
+
+  if (!u) {
+    $("withdrawMessage").innerHTML =
+      "<p class='warning'>Create a local account first. No withdrawal will be made here.</p>";
+    return;
+  }
+
+  const amount = Number($("withdrawAmount").value);
+  const accountName = $("withdrawName").value.trim();
+  const account = $("withdrawAccount").value.trim();
+
+  if (!Number.isFinite(amount) || amount<=0 || amount>100000) {
+    return alert("Enter a valid withdrawal amount.");
+  }
+
+  const request = {
+    id:makeId(), userId:u.id, amount,
+    accountName,account,
+    status:"Pending",
+    date:new Date().toLocaleString(),
+    createdAt:Date.now()
+  };
+
+  data.withdrawals.unshift(request);
+  notify(u.id, `Withdrawal request ${request.id} submitted. No money was transferred.`);
+  saveData();
+
+  $("withdrawMessage").innerHTML =
+    "<p class='success'>Request recorded locally. Status: Pending review. No BSP transaction occurred.</p>";
+  $("withdrawForm").reset();
+  refreshAll();
+});
+
+function copyText(value) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(value)
+      .then(()=>alert("Copied."))
+      .catch(()=>prompt("Copy this reference:",value));
+  } else {
+    prompt("Copy this reference:",value);
+  }
+}
+
+renderPlans();
+refreshAll();
+</script>
+</body>
+</html>
